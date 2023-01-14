@@ -10,7 +10,7 @@ terraform {
 
 # Networkの設定
 resource "aws_vpc" "this" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
 }
 
 resource "aws_internet_gateway" "this" {
@@ -18,10 +18,10 @@ resource "aws_internet_gateway" "this" {
 }
 
 resource "aws_subnet" "this" {
-  vpc_id                  = aws_vpc.this.id
+  vpc_id = aws_vpc.this.id
 
-  availability_zone       = "ap-northeast-1a"
-  cidr_block              = "10.0.128.0/24"
+  availability_zone = "ap-northeast-1a"
+  cidr_block        = "10.0.128.0/24"
 }
 
 resource "aws_route_table" "this" {
@@ -59,11 +59,11 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_instance" "this" {
-  ami = "ami-0bba69335379e17f8"
+  ami           = "ami-0bba69335379e17f8"
   instance_type = "t2.micro"
 
-  subnet_id = aws_subnet.this.id
-  private_ip = "10.0.128.100"
+  subnet_id                   = aws_subnet.this.id
+  private_ip                  = "10.0.128.100"
   associate_public_ip_address = true
-  security_groups = [aws_security_group.this.id]
+  security_groups             = [aws_security_group.this.id]
 }
